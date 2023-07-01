@@ -5,6 +5,7 @@ import sqlite3
 
 if __name__ == '__main__':
 
+   create_connection(r"database.db")
    project = ("test", "2020-05-11 00:00:00", "2020-05-13 00:00:00")
    conn = create_connection("database.db")
    add_project(conn, project)
