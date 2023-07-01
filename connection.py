@@ -9,9 +9,7 @@ def create_connection(db_file):
        return conn
    except Error as e:
        print(e)
-   finally:
-       if conn:
-        conn.close()
+   
 
 def create_connection_in_memory():
    conn = None
@@ -21,8 +19,6 @@ def create_connection_in_memory():
        return conn
    except Error as e:
        print(e)
-   finally:
-       if conn:
-           conn.close()
+   
 
 

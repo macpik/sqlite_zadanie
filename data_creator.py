@@ -1,4 +1,3 @@
-
 def add_project(conn, project):
    
    sql = '''INSERT INTO project(drugi, start_date, end_date)
