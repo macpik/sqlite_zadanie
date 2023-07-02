@@ -26,9 +26,3 @@ def update(conn, table, id, **kwargs):
        print("OK")
    except sqlite3.OperationalError as e:
        print(e)
-
-if __name__ == "__main__":
-   conn = create_connection("testowa_baza.db")
-   update(conn, "second", 2, status="ended")
-   update(conn, "first", 1, start_date="never")
-   conn.close()

@@ -1,14 +1,16 @@
 from connection import create_connection, create_connection_in_memory
 from data_creator import add_task, add_project
-from data_select import select_all, select_where
+from data_select import select_all
 from tables_creator import execute_sql
+from data_update import update
+from data_delete import delete_all, delete_where
 import sqlite3
 
 if __name__ == '__main__':
 
    create_project_sql = """
    -- project table
-   CREATE TABLE IF NOT EXISTS first (
+   CREATE TABLE IF NOT EXISTS project (
       id integer PRIMARY KEY,
       drugi parametr text NOT NULL,
       start_date text,
@@ -18,7 +20,7 @@ if __name__ == '__main__':
 
    create_task_sql = """
    -- task table
-   CREATE TABLE IF NOT EXISTS second (
+   CREATE TABLE IF NOT EXISTS task (
       id integer PRIMARY KEY,
       zabrane_id integer NOT NULL,
       nazwa VARCHAR(250) NOT NULL,
@@ -26,7 +28,7 @@ if __name__ == '__main__':
       status VARCHAR(15) NOT NULL,
       start_date text NOT NULL,
       end_date text NOT NULL,
-      FOREIGN KEY (zabrane_id) REFERENCES first (id)
+      FOREIGN KEY (zabrane_id) REFERENCES project (id)
    );
    """
 
@@ -58,4 +60,13 @@ if __name__ == '__main__':
    print(pr_id, task_id)
    conn.commit()
 
-   select_all()
+   select_all(conn, 'project')
+
+   conn = create_connection("testowa_baza.db")
+   update(conn, "project", 2, status="ended")
+   update(conn, "task", 1, start_date="never")
+   conn.close()
+
+   conn = create_connection("testowa_baza.db")
+   delete_where(conn, "project", id=1)
+   conn.close()

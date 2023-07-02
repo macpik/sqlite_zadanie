@@ -31,10 +31,3 @@ def delete_all(conn, table):
    cur.execute(sql)
    conn.commit()
    print("Deleted")
-
-if __name__ == "__main__":
-   conn = create_connection("testowa_baza.db")
-   delete_where(conn, "tasks", id=3)
-   delete_all(conn, "tasks")
-
-   """i didnt run it"""
