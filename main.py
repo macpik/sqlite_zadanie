@@ -38,11 +38,8 @@ if __name__ == '__main__':
    if conn is not None:
        execute_sql(conn, create_project_sql)
        execute_sql(conn, create_task_sql)
-       conn.close()
 
-   create_connection(r"testowa_baza.db")
    project = ("test", "2020-05-11 00:00:00", "2020-05-13 00:00:00")
-   conn = create_connection("testowa_baza.db")
    add_project(conn, project)
    pr_id = add_project(conn, project)
 
@@ -62,11 +59,8 @@ if __name__ == '__main__':
 
    select_all(conn, 'project')
 
-   conn = create_connection("testowa_baza.db")
    update(conn, "project", 2, status="ended")
    update(conn, "task", 1, start_date="never")
-   conn.close()
 
-   conn = create_connection("testowa_baza.db")
    delete_where(conn, "project", id=1)
    conn.close()
